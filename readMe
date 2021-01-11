@@ -1,0 +1,9 @@
+actionSpace is a Javascript library, allowing users to perform CRUD operation on data of differant mimeTypes.
+1. Text
+2. RichText
+3. Structured Data
+    > Json
+    > HTML
+    > Array in Table
+4. Image
+5. Video
