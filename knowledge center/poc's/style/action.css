@@ -1,0 +1,88 @@
+body {
+    margin: 0;
+    color: var(--text);
+    font-size: 21px;
+}
+
+
+
+.topbar {
+    overflow: hidden;
+    background: var(--background);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    font-size: 18px;
+    z-index: 10;
+}
+
+.topbar-row {
+    max-width: 950px;
+    margin: auto;
+    display: block;
+    text-align: right;
+}
+
+.topbar-button {
+    font-family: 'ubuntu', sans-serif;
+    color: var(--text);
+    font-size: 15px;
+    border: 0;
+    padding: 20px 24px 30px 21px;
+    cursor: pointer;
+    background: var(--background);
+    float: right;
+    height: 40px;
+    margin-top: 5px;
+}
+
+.topbar-button:hover {
+    outline: none;
+    color: #fcaf12;
+}
+
+.topbar-button.active {
+    color: #fcb312;
+}
+
+
+.container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+.content {
+    font-family: 'Buenard', sans-serif;
+    font-size: 21px;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-height: 900px;
+    padding: 10px;
+    padding-top: 0;
+    margin-top: -4px;
+    overflow-wrap: break-word;
+    background: var(--background);
+    color: var(--text);
+    border: 0;
+    border-radius: 4px;
+    outline: 0px;
+}
+
+.editor {
+    font-family: 'Buenard', sans-serif;
+    display: block;
+    max-width: 900px;
+    height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: auto;
+    padding: 0px 50px 50px 150px;
+    margin-top: 64px;
+}
+
+[contenteditable] {
+    background: var(--background);
+    color: var(--text);
+  }

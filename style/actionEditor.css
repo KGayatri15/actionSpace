@@ -1,0 +1,23 @@
+*{
+  box-sizing: border-box;
+  margin: 2 px;
+  padding: 2px;
+ -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+    font-family: 'poppins'; 
+ }
+body {
+    background: #f2f6f7;
+    width: 100vw;
+    height: 100vh;
+    margin: 15vw;
+    padding: 0px;
+}
+
+
+.actionEditor-block:focus { background: #fafdfd; border-radius: .5rem; resize: both; outline: none;;
+
+
+
+
