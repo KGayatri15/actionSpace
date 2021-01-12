@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../evertythingSchema"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "actionSpace"
+	}
+}
