@@ -1,3 +1,7 @@
+/**
+ * This file has to be further divided into seperate files of their respective class.
+ */
+
 // all the json definations / object to be save in seperate folder called Json. Hence this to be moved.
 var actionEditor = {
     style: '/*min-height : 200px;*/ width: max-content; border-top: 0px; padding: 21px; overflow: auto; display:grid',
@@ -107,16 +111,11 @@ var actionEditor = {
 }
 //this to be deleted and validated with attributes of live elements on runtime
 var htmlAttributesList = ['name', 'label', 'onclick', 'lineNumbers', 'class', 'id', 'text', 'title', 'content', 'value', 'type', 'data-cmd']
-//create output
-//filter keys
-//filter values
-//append to output
-// getChild
 
-
-
-//Ideally this should extend controller class and should be renamed to event Contoller. 
-//This 
+/**
+ * Ideally this should extend controller class and should be renamed to event Contoller. 
+ * Event Controller registers/executes/conduct all the event in the actionSpace System
+ */
 class EventEmitter {
     constructor() {
         this._events = {};
@@ -130,6 +129,10 @@ class EventEmitter {
         (this._events[evt] || []).slice().forEach(lsn => lsn(arg));
     }
 }
+
+/**
+ * Ideally should extend controller
+ */
 
 class process {
 
@@ -213,6 +216,10 @@ class process {
 
 }
 
+/**
+ * Do we need both entity  and entity Model Class??
+ * 
+ */
 class Entity {
     constructor(input, output) {
         this.entity = process.processReq(input, output);
