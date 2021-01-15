@@ -38,7 +38,10 @@
 // //https://sites.google.com/site/scriptsexamples/custom-methods/2d-arrays-library
 
 
-
+/**
+ *  we should merge conductor and operator into 1 class
+ * we need to add few more methods eg. conductFlow , that conducts an array of operation, similar to operator.Onevery1
+ */
 class conductor {
     //this function calls a callback function with a and b parameter. Conducted Routes have to be registered before else will throw error.
     //  on param = [ anyEvent ]
