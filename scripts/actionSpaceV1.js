@@ -375,7 +375,7 @@ class entityView extends EventEmitter {
     updateDomContent(cmd) {
         if (cmd === "createLink") {
             let url = prompt("Enter Url");
-            this.elements.document.execCommand(cmd, true, url)
+            this.elements.document.execCommand(cmd, true, url) // Since View doesnt perform any action on users data directly, Ideally this should be part of controller class and should be handled by event controller
 
         } else
             this.elements.document.execCommand(cmd, false, null)
