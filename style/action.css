@@ -77,12 +77,13 @@ body {
     height: 500px;
     overflow-y: auto;
     overflow-x: hidden;
-    margin: auto;
-    padding: 0px 50px 50px 150px;
-    margin-top: 64px;
+    padding: 0 50px 50px 150px;
+    margin: 64px auto auto;
 }
 
 [contenteditable] {
     background: var(--background);
     color: var(--text);
-  }
+    height: 700px;
+    border: 2px solid black;
+}
