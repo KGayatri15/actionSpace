@@ -104,6 +104,7 @@ var actionEditor = {
 
     },
 }
+//this to be deleted and validated with attributes of live elements on runtime
 var htmlAttributesList = ['name', 'label', 'onclick', 'lineNumbers', 'class', 'id', 'text', 'title', 'content', 'value', 'type', 'data-cmd']
 //create output
 //filter keys
@@ -341,7 +342,6 @@ class entityView extends EventEmitter {
         super();
         this.model = model
         this.elements = elements
-
         let buttons = this.elements.buttons
         for (let i = 0; i < buttons.length; ++i) {
             buttons[i].addEventListener('click', () => {
