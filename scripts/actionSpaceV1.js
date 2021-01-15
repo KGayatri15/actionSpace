@@ -1,3 +1,4 @@
+// all the json definations / object to be save in seperate folder called Json. Hence this to be moved.
 var actionEditor = {
     style: '/*min-height : 200px;*/ width: max-content; border-top: 0px; padding: 21px; overflow: auto; display:grid',
     toolBar: [
@@ -113,6 +114,9 @@ var htmlAttributesList = ['name', 'label', 'onclick', 'lineNumbers', 'class', 'i
 // getChild
 
 
+
+//Ideally this should extend controller class and should be renamed to event Contoller. 
+//This 
 class EventEmitter {
     constructor() {
         this._events = {};
