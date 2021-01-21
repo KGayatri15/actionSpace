@@ -13,9 +13,9 @@
             // Entity.set(input, response, 'id', key + entityIndex.next().value);
         }
         if (operate.is(output).includes("Object")) { //Only HTML creation
-            console.log("create request for ", input, output, key, value)
+            console.log("create request for ", input, output, key, value);
 
-            response = new Object()
+            response = new Object();
 
             //response = key;
             //response.set(value,key)
@@ -26,9 +26,9 @@
             // entity.set(input, response, 'id', key + index.next().value);
         }
         if (operate.is(output).includes("Array")) { //Only HTML creation
-            console.log("create request for ", input, output, key, value)
+            console.log("create request for ", input, output, key, value);
 
-            response = new Object()
+            response = new Object();
 
             //response = key;
             //response.set(value,key)
@@ -44,7 +44,7 @@
     }
 
     static append(input, output, key, value, callback, callbackClass) {
-        console.log('appending', input, output)
+        console.log('appending', input, output);
 
         if (operate.is(output).includes("HTML")) { //Onl
             console.log(output)// y HTML creation
@@ -77,7 +77,7 @@
 
             if (operate.isIn(key, htmlAttributesList)) {
                 //console.log("setting",key, value,"in",output)
-                output.setAttribute(key, value)
+                output.setAttribute(key, value);
                 //console.log(output);
             } else {
                 //var buffer = output;
@@ -95,11 +95,11 @@
     }
 
     update(input, output, key, value, callback, callbackClass) {
-        console.log('updating', input, output)
+        console.log('updating', input, output);
 
     }
 
     delete() {
-      clearStorage()
+      clearStorage();
     }
 }

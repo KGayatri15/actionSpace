@@ -1,6 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
-    AutoSave.start();
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//     AutoSave.start();
+// });
 
 
 const AutoSave = (function () {
@@ -14,7 +14,7 @@ const AutoSave = (function () {
         if (editorContent) {
             localStorage.setItem('AutoSave' + document.location, editorContent);
         }
-        const dir = getEditorElement().getAttribute("dir")
+        const dir = getEditorElement().getAttribute("dir");
         localStorage.setItem('dirIsRtl', dir === "rtl");
     }
 
@@ -33,7 +33,7 @@ const AutoSave = (function () {
         }
 
         const dirIsRtl = localStorage.getItem('dirIsRtl');
-        getEditorElement().setAttribute("dir", JSON.parse(dirIsRtl) ? "rtl" : "ltr")
+        getEditorElement().setAttribute("dir", JSON.parse(dirIsRtl) ? "rtl" : "ltr");
     }
 
     return {
@@ -67,62 +67,65 @@ const AutoSave = (function () {
 
 }());
 
-// Clear All //
+class storageHelper {
 
-function clearStorage() {
-    if (confirm("Are you sure you want to create a new text? This will erase all the content.")) {
-        window.localStorage.clear();
-        let content=document.getElementsByTagName("divblock")[0]
+    clearStorage() {
+        if (confirm("Are you sure you want to create a new text? This will erase all the content.")) {
+            window.localStorage.clear();
+            let content = document.getElementsByTagName("divblock")[0];
 
-        while (content.hasChildNodes()) {
-            content.removeChild(content.firstChild);
+            while (content.hasChildNodes()) {
+                content.removeChild(content.firstChild);
+            }
+
+            // location.reload();
         }
-
-        // location.reload();
     }
-}
 
-function saveToStorage() {
-    let divArray = document.getElementsByTagName('divblock')[0].children
+    saveToStorage() {
+        let divArray = document.getElementsByTagName('divblock')[0].children;
 
-    let divObjectArray = []
-    for (let i = 0; i < divArray.length; ++i) {
-        let singleDiv = {
-            name: 'div',
-            contentEditable: true,
-            class: 'div-block',
-            lineNumbers: true,
-            innerHTML: divArray[i].innerHTML,
-            state: 'idle',
+        let divObjectArray = [];
+        for (let i = 0; i < divArray.length; ++i) {
+            let singleDiv = {
+                name: 'div',
+                contentEditable: true,
+                class: 'div-block',
+                lineNumbers: true,
+                innerHTML: divArray[i].innerHTML,
+                state: 'idle',
+            };
+            divObjectArray.push(singleDiv);
         }
-        divObjectArray.push(singleDiv)
+        console.log(divObjectArray);
+        actionEditor.actionEditorBlock[0].divBlock = divObjectArray;
+        // localStorage.dom = JSON.stringify(actionEditor);
+        this.saveToLocal();
+
+
     }
-    console.log(divObjectArray)
-    actionEditor.actionEditorBlock[0].divBlock = divObjectArray
-    localStorage.dom = JSON.stringify(actionEditor)
-    saveToLocal();
 
+    saveToLocal() {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(new Blob([JSON.stringify(actionEditor, null, 2)], {
+            type: "application/json"
+        }));
+        a.setAttribute("download", "data.json");
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        console.log(actionEditor);
+    }
 
-}
-function saveToLocal() {
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(new Blob([JSON.stringify(actionEditor, null, 2)], {
-        type: "application/json"
-    }));
-    a.setAttribute("download", "data.json");
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    console.log(actionEditor)
-}
-var openFile = function(event) {
-    var input = event.target;
-    console.log("her")
-    var reader = new FileReader();
-    reader.onload = function(){
-        var text = reader.result;
-        actionEditor=JSON.parse(text)
-        console.log(reader.result.substring(0, 200));
+    openFile = function (event) {
+        var input = event.target;
+        console.log("her");
+        var reader = new FileReader();
+        reader.onload = function () {
+            var text = reader.result;
+            actionEditor = JSON.parse(text);
+            console.log(reader.result.substring(0, 200));
+        };
+        reader.readAsText(input.files[0]);
     };
-    reader.readAsText(input.files[0]);
-};
+}
