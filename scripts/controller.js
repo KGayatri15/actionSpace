@@ -18,8 +18,14 @@ class entityController {
         ehhView.on("reload", () => {
             this.reload();
         })
-        ehhView.on("loadJson",(event)=>{
+        ehhView.on("loadJson", (event) => {
             this.openFile(event);
+        })
+        ehhView.on('signup', () => {
+            this.startSignUp()
+        })
+        ehhView.on('login', () => {
+            this.startLogin()
         })
     }
 
@@ -32,7 +38,7 @@ class entityController {
         //TODO(send this to backend)
         alert('check Console');
         let htmlFromEditor = this.ehhView.getDomContent();
-        console.log(this.ehhView.getDomContent());
+        console.log(htmlFromEditor);
     }
 
     otherActions(command) {
@@ -51,26 +57,35 @@ class entityController {
     }
 
     save() {
-       let storage= new storageHelper
+        let storage = new storageHelper
         storage.saveToStorage()
     }
 
     reload() {
-        // let myObject = JSON.parse(localStorage.dom);
-        // console.log(myObject)
 
-        const temp = new Entity(actionEditor, ehhAppOutput);
-        document.getElementsByTagName('body')[0].appendChild(temp.entity);
-        let editor = document.getElementsByTagName('ehhoutput')[0];
-        editor.children[1].innerHTML=editor.children[4].innerHTML;
-        while (editor.children.length>3){
-            editor.removeChild(editor.lastElementChild);
+        const body = document.getElementsByTagName('body')[0];
+        while (body.firstChild) {
+            body.removeChild(body.firstChild)
         }
+
+        loadActionEditor()
     }
-    openFile(event){
-        let storage= new storageHelper
+
+
+    openFile(event) {
+        let storage = new storageHelper
         storage.openFile(event)
     }
+
+    startSignUp() {
+        this.ehhView.renderSignUp()
+
+    }
+
+    startLogin() {
+        this.ehhView.renderLoginForm()
+    }
+
 }
 
 
@@ -155,4 +170,76 @@ class process extends entityController {
         return response;
     }
 
+}
+
+
+class formController {
+    constructor(view, model) {
+        this.view = view
+        this.model = model
+        this.view.on('signup', (data) => {
+            this.startSignUpFlow(data)
+        })
+        this.view.on('login', (data) => {
+            this.login(data)
+        })
+    }
+
+    signUp(data) {
+        console.warn(data)
+        if (data!=null ||data!==false) {
+            localStorage.setItem(data.username, data.password);
+            return true
+        } else {
+            return false
+        }
+
+    }
+
+    login(data) {
+        console.log(localStorage.getItem(data.username))
+        if (localStorage.getItem(data.username)=== data.password){
+            this.renderEditor(true);
+        }
+    else{
+        alert("wrong id or password")
+        }
+    }
+
+    checkUserNameExist(data) {
+        return {
+            exist: !!localStorage.getItem(data.username),
+            data
+        };
+    }
+
+    initiateSignUp(exist) {
+        console.log(exist)
+        if (exist.exist===false) {
+            return exist.data
+        } else {
+            return null
+        }
+    }
+
+    renderEditor(exist) {
+        if (!exist) {
+            alert("username exist")
+        }
+        const body = document.getElementsByTagName('body')[0];
+        while (body.firstChild) {
+            body.removeChild(body.firstChild)
+        }
+
+        loadActionEditor()
+    }
+
+    startSignUpFlow(data) {
+        var flow = new everyFlow({
+            param: data,
+            canBeReStarted: false,
+            autoRestartOnFailure: false
+        })
+        flow.start(this.checkUserNameExist, this.initiateSignUp, this.signUp, this.renderEditor);
+    }
 }

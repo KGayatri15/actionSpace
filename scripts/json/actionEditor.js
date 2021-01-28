@@ -1,4 +1,15 @@
 var actionEditor = {
+    div: [{
+        name: 'button',
+        type: 'button',
+        innerText: 'Sign Up',
+        id:'sign'
+    },{
+        name: 'button',
+        type: 'button',
+        innerText: 'Login ',
+        id:'log'
+    }],
     style: '/*min-height : 200px;*/ width: max-content; border-top: 0px; padding: 21px; overflow: auto; display:grid',
     toolBar: [
         {
@@ -142,13 +153,58 @@ var actionEditor = {
             class: 'topbar-button',
             'innerHTML': '<i class="fas fa-sync"></i>',
             'data-cmd': 'reload'
-        },{
-            name:"input",
-            accept:"application/json",
+        }, {
+            name: "input",
+            accept: "application/json",
             type: 'file',
-            "data-cmd":'loadJson'
+            "data-cmd": 'loadJson'
         }
     ]
 };
 //this to be deleted and validated with attributes of live elements on runtime
 var htmlAttributesList = ['name', 'label', 'onclick', 'lineNumbers', 'class', 'id', 'text', 'title', 'content', 'value', 'type', 'data-cmd'];
+
+
+var loginForm = {
+    form: [
+        {
+            name: 'input',
+            type: 'text',
+            id:'username',
+        },
+
+        {
+            name: 'input',
+            type: 'password',
+            id:'password'
+        }, {
+            name: 'button',
+            type: 'button',
+            innerText: 'Login',
+            id:'login'
+        }
+
+    ]
+}
+
+var signUpForm = {
+    form: [
+        {
+            name: 'input',
+            type: 'text',
+            id:'username',
+        },
+
+        {
+            name: 'input',
+            type: 'password',
+            id:'password'
+        }, {
+            name: 'button',
+            type: 'button',
+            innerText: 'Sign Up',
+            id:'signup'
+        }
+
+    ]
+}

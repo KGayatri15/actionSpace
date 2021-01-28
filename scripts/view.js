@@ -43,19 +43,25 @@ class EntityView extends EventEmitter {
                     this.emit("addHeading");
                 } else if (cmd === "para") {
                     this.emit("addPara");
-                }else if(cmd==="save"){
+                } else if (cmd === "save") {
                     this.emit("save");
-                }else  if(cmd==="reload"){
+                } else if (cmd === "reload") {
                     this.emit("reload");
                 }
             })
         }
         // console.log(bottomButton[4]);
-        bottomButton[4].addEventListener('change',(event)=>{
+        bottomButton[4].addEventListener('change', (event) => {
             // console.log("he")
-            this.emit("loadJson",event);
+            this.emit("loadJson", event);
         })
 
+        this.elements.signUp.addEventListener('click',()=>{
+            this.emit('signup');
+        })
+        this.elements.login.addEventListener('click',()=>{
+            this.emit('login')
+        })
 
     }
 
@@ -93,4 +99,49 @@ class EntityView extends EventEmitter {
         return this.elements.editor.innerHTML;
     }
 
+    renderLoginForm(){
+        const body = document.getElementsByTagName('body')[0];
+        while (body.firstChild) {
+            body.removeChild(body.firstChild)
+        }
+        loadLoginForm()
+
+    }
+    renderSignUp(){
+        const body = document.getElementsByTagName('body')[0];
+        while (body.firstChild) {
+            body.removeChild(body.firstChild)
+        }
+        loadSignUpForm()
+
+    }
+
 }
+
+
+class formView extends EventEmitter {
+    constructor(model, elements) {
+        super();
+        this.model = model
+        this.elements = elements
+
+        console.log(this.elements)
+
+
+            this.elements.signup?.addEventListener('click',()=> {
+                let username = this.elements.username.value;
+                let password = this.elements.password.value;
+                this.emit('signup',{username,password})
+
+            });
+            this.elements.login?.addEventListener('click',()=>{
+                let username = this.elements.username.value;
+                let password = this.elements.password.value;
+                this.emit('login',{username,password})
+
+            })
+    }
+
+}
+
+
