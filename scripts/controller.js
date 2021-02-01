@@ -184,18 +184,6 @@ class formController {
             this.login(data)
         })
     }
-
-    signUp(data) {
-        console.warn(data)
-        if (data!=null ||data!==false) {
-            localStorage.setItem(data.username, data.password);
-            return true
-        } else {
-            return false
-        }
-
-    }
-
     login(data) {
         console.log(localStorage.getItem(data.username))
         if (localStorage.getItem(data.username)=== data.password){
@@ -205,27 +193,7 @@ class formController {
         alert("wrong id or password")
         }
     }
-
-    checkUserNameExist(data) {
-        return {
-            exist: !!localStorage.getItem(data.username),
-            data
-        };
-    }
-
-    initiateSignUp(exist) {
-        console.log(exist)
-        if (exist.exist===false) {
-            return exist.data
-        } else {
-            return null
-        }
-    }
-
     renderEditor(exist) {
-        if (!exist) {
-            alert("username exist")
-        }
         const body = document.getElementsByTagName('body')[0];
         while (body.firstChild) {
             body.removeChild(body.firstChild)
@@ -233,13 +201,46 @@ class formController {
 
         loadActionEditor()
     }
-
+    checkIfExists(data){
+        if(localStorage.getItem(data.username)=== null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    userExists(data){
+        alert("Username :- " + data.username + " exists");
+    }
+    setUsername(data){
+        localStorage.setItem(data.username,data.password);
+        return true;
+    }
     startSignUpFlow(data) {
-        var flow = new everyFlow({
-            param: data,
-            canBeReStarted: false,
-            autoRestartOnFailure: false
+        var flow = new workflow({
+            input: data,
+            tasks:[
+                {
+                    task:this.checkIfExists,
+                    dependent:null
+                },
+                {
+                    task:this.userExists,
+                    dependent:1,
+                    equal:true
+                },
+                {
+                    task:this.setUsername,
+                    dependent:1,
+                    equal:false
+                },
+                {
+                    task:this.renderEditor,
+                    dependent:3,
+                    equal:true
+                }            
+            ]
+            
         })
-        flow.start(this.checkUserNameExist, this.initiateSignUp, this.signUp, this.renderEditor);
+        
     }
 }
