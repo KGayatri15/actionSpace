@@ -5,7 +5,7 @@
 // https://frontstuff.io/build-a-simple-validator-service-in-javascript
 // defaultOutput = { output: 'self', when: 'onTrue' };
 
-// static modeIndicator() { 
+// static modeIndicator() {
 //     if (input === "{") {
 //         //create a range.This position being starter
 //         //set RangeType to Object;
@@ -13,9 +13,9 @@
 //         //add reflection to editor;
 //         // update editor
 
-    
+
 //     }
-//     if (input === "[") { 
+//     if (input === "[") {
 // //create a range.This position being starter
 //         //set RangeType to Object;
 //         //Intitiate ObjectRuleModel;
@@ -29,7 +29,7 @@
 
 
 
-// // static onEveryEntity1(a, b, callback) { 
+// // static onEveryEntity1(a, b, callback) {
 // //     a.every(static (element) { callback(element, b); });
 // // }
 
@@ -59,40 +59,40 @@ class conductor {
     }
 }
 
-class operator { 
+class operator {
     //    //arr.every(callback(element[, index[, array]])[, thisArg])
     static onEvery1(a, b, callbacks) { return callbacks.every(function (callback) {return operate[callback](a, b);}); }
 
 }
 
 class operate {
-    
+
     // operate to check if the input is not null or undefined to be added
-    static isEmpty(argA) { return Object.keys(argA).length === 0 ? true : false }
-    static isNotEmpty(argA) { return argA !== '' && argA !== null && typeof argA !== 'undefined' ? true : false }
+    static isEmpty(argA) { return Object.keys(argA).length === 0 }
+    static isNotEmpty(argA) { return argA !== '' && argA !== null && typeof argA !== 'undefined' }
     //returs the data Type of the input.
     static is(argA) { return Object.getPrototypeOf(argA).constructor.name; }
     static isInt(argA) { return Number.isInteger(argA); }
     static isNumber(argA) { return Number.parseFloat(argA).toString() !== 'NaN' }
-    static isString(argA) { return typeof argA === 'string' ? true : false }
+    static isString(argA) { return typeof argA === 'string' }
     /**
      * returns if the input is a key/value in the object options.argB
      * @param {*} argA
      * @param {*} argB  is required to be not empty
-     * 
+     *
      */
-    static isIn(argA, argB) { return argB.indexOf(argA) > -1 ? true : false; }
+    static isIn(argA, argB) { return argB.indexOf(argA) > -1; }
     //curently works only for string numbers
-    static isEqualStrict(argA, argB) { return argA === argB ? true : false; }
+    static isEqualStrict(argA, argB) { return argA === argB; }
     //for array's one sided value existence check, return true if each element of a is present in b
-    static isGreaterThan(argA, argB) { return argA > argB ? true : false }
-    static isGreaterthanOrEqual(argA, argB) { return argA => argB ? true : false }
-    static isSmallerthan(argA, argB) { return argA < argB ? true : false }
-    static isSmallerthanOrEqual(argA, argB) { return argA <= argB ? true : false }
+    static isGreaterThan(argA, argB) { return argA > argB }
+    static isGreaterthanOrEqual(argA, argB) { return argA => !!argB }
+    static isSmallerthan(argA, argB) { return argA < argB }
+    static isSmallerthanOrEqual(argA, argB) { return argA <= argB }
     static instanceof(argA, argB) { return console.log("work in process"); }
     //validate 2 Object, with key's and values
     static isSameObject(argA, argB) {
-        
+
         return console.log("work in process");
     }
     //check if argB has all the keys from argA // only for array.
@@ -114,9 +114,9 @@ class operate {
     static isHTML(argA) { return operate.is(argA).includes("HTML") }
     // Returns if a value is null
     static isNull(value) { return value === null; }
-    // Returns if a value is undefined 
+    // Returns if a value is undefined
     static isUndefined(value) { return typeof value === 'undefined'; }
-    // Returns if a value is a boolean 
+    // Returns if a value is a boolean
     static isBoolean(value) { return typeof value === 'boolean'; }
     //Returns if a value is a regexp
     static isRegExp(value) { return value && typeof value === 'object' && value.constructor === RegExp; }
@@ -144,8 +144,8 @@ class operate {
     }
     static isChild(argA, argB) { }
     static isParent(argA, argB) { }
-    static isEven(argA) { return numbers.every(function (e) { return e % 2 == 0; }); }
-    static isOdd(argA) { return numbers.every(function (e) { return Math.abs(e % 2) == 1; }); }
+    static isEven(argA) { return numbers.every(function (e) { return e % 2 === 0; }); }
+    static isOdd(argA) { return numbers.every(function (e) { return Math.abs(e % 2) === 1; }); }
 }
 
 function* createIndex() {

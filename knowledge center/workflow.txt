@@ -1,0 +1,14 @@
+{
+    inputs://inputs as a json object
+    tasks:[
+        {
+           task://function N 
+           dependent: null
+        },//task1
+        {
+           task:
+           dependent: 1
+           equal: true //compare with the result of task on which this task is dependent.Eg Task 2 equal value i.e true compared with result of Task1
+        },//task2
+    ]
+}

@@ -23,14 +23,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36fe03ae-afd7-42dd-a0ab-82f328f6e636" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/scripts/helpers/everyFlow.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/actionEditor.html" beforeDir="false" afterPath="$PROJECT_DIR$/actionEditor.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/actionSpaceV1.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/actionSpaceV1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style/action.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/action.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/json/actionEditor.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/json/actionEditor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/operateV2.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/operateV2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/view.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/view.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,6 +55,9 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1n2qv0E9zFpF95pt3GqkjFGBZn8" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -49,6 +65,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -61,6 +78,14 @@
       <option name="presentableId" value="Default" />
       <updated>1610598759557</updated>
       <workItem from="1610598761288" duration="237000" />
+      <workItem from="1610710372543" duration="6577000" />
+      <workItem from="1610882706415" duration="16877000" />
+      <workItem from="1611040842150" duration="9146000" />
+      <workItem from="1611139116032" duration="3161000" />
+      <workItem from="1611392226941" duration="7758000" />
+      <workItem from="1611410266885" duration="1689000" />
+      <workItem from="1611725617476" duration="5559000" />
+      <workItem from="1611820818854" duration="11830000" />
     </task>
     <servers />
   </component>
@@ -77,5 +102,24 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="564" y="130" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1610772670566">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="564" y="130" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1610772670566" />
+    <state x="777" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1610774182312">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="777" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1610774182312" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1611052396153">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611052396153" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1611860209663">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611860209663" />
   </component>
 </project>
