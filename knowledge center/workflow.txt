@@ -9,23 +9,23 @@
             method:methodName
             arguments:{},
             condition:{
-                completedTasks:[],
-                required:{
-                    "argName"://actionStepIndex of result required
-                    //the argNames included in required will be included in arguments of the method
-                },
+                completedActionSteps:[],
                 compare:[
                     {
-                        value://actionStepIndex of result required,
+                        value://actionStepIndex of result,
                         equal://value should be equal to ___
                     },
                     {
-                        value://actionStepIndex of result required,
+                        value://actionStepIndex of result,
                         type://value should be of type ___
                     }
                 ]
                 //once condition is fulfilled then only a method is executed
-            }
+            },
+            required:{
+                    "argName"://actionStepIndex of result required
+                    //the argNames included in required will be included in arguments of the method
+                },
         },//actionStep1
         ...other actionSteps
     ]

@@ -193,7 +193,7 @@ class formController {
         alert("wrong id or password")
         }
     }
-    renderEditor(exist) {
+    renderEditor() {
         const body = document.getElementsByTagName('body')[0];
         while (body.firstChild) {
             body.removeChild(body.firstChild)
@@ -208,8 +208,8 @@ class formController {
             return true;
         }
     }
-    userExists(data){
-        alert("Username :- " + data.username + " exists");
+    userExists(){
+        alert("Username you typed in exists");
     }
     setUsername(data){
         localStorage.setItem(data.username,data.password);
@@ -217,29 +217,47 @@ class formController {
     }
     startSignUpFlow(data) {
         var flow = new workflow({
-            input: data,
-            tasks:[
-                {
-                    task:this.checkIfExists,
-                    dependent:null
-                },
-                {
-                    task:this.userExists,
-                    dependent:1,
-                    equal:true
-                },
-                {
-                    task:this.setUsername,
-                    dependent:1,
-                    equal:false
-                },
-                {
-                    task:this.renderEditor,
-                    dependent:3,
-                    equal:true
-                }            
-            ]
-            
+              actionSteps:[
+                  {
+                    actionStepIndex:1,
+                    method:this.checkIfExists,
+                    arguments:data,
+                  },
+                  {
+                    actionStepIndex:2,
+                    method:this.userExists,
+                    condition:{
+                        completedActionSteps:[1],
+                        compare:[
+                            {
+                                value:1,
+                                equal:true
+                            },
+                        ]
+                    },
+                  },
+                  {
+                    actionStepIndex:3,
+                    method:this.setUsername,
+                    arguments:data,
+                    condition:{
+                        completedActionSteps:[1],
+                        compare:[
+                            {
+                                value:1,
+                                equal:false
+                            },
+                        ]
+                    },
+                  },
+                  {
+                    actionStepIndex:4,
+                    method:this.renderEditor,
+                    condition:{
+                        completedActionSteps:[1,3],
+                    },
+                  }
+              ]
         })
         
     }
