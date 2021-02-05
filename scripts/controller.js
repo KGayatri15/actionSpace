@@ -181,51 +181,50 @@ class formController {
             this.startSignUpFlow(data)
         })
         this.view.on('login', (data) => {
-            this.login(data)
+            this.startLoginFlow(data)
         })
     }
-    login(data) {
+    checkCredetials(data) {
         console.log(localStorage.getItem(data.username))
-        if (localStorage.getItem(data.username)=== data.password){
-            this.renderEditor(true);
+        if (operate.isEqualStrict(localStorage.getItem(data.username),data.password))
+           return true;
+        return false;
+    }
+    checkUsernameExists(data){
+        if(operate.isEqualStrict(localStorage.getItem(data.username),null)){
+            return false;
+        }else{
+            return true;
         }
-    else{
-        alert("wrong id or password")
-        }
+    }
+    alertAbout(data){
+        if(data.exist)
+            alert("Username you typed in exists");
+        else
+            alert("This username doesn't exist");
+    }
+    setUsername(data){
+        localStorage.setItem(data.username,data.password);
+        return true;
     }
     renderEditor() {
         const body = document.getElementsByTagName('body')[0];
         while (body.firstChild) {
             body.removeChild(body.firstChild)
         }
-
         loadActionEditor()
-    }
-    checkIfExists(data){
-        if(localStorage.getItem(data.username)=== null){
-            return false;
-        }else{
-            return true;
-        }
-    }
-    userExists(){
-        alert("Username you typed in exists");
-    }
-    setUsername(data){
-        localStorage.setItem(data.username,data.password);
-        return true;
     }
     startSignUpFlow(data) {
         var flow = new workflow({
               actionSteps:[
                   {
                     actionStepIndex:1,
-                    method:this.checkIfExists,
+                    method:this.checkUsernameExists,
                     arguments:data,
                   },
                   {
                     actionStepIndex:2,
-                    method:this.userExists,
+                    method:this.alertAbout,
                     condition:{
                         completedActionSteps:[1],
                         compare:[
@@ -235,6 +234,9 @@ class formController {
                             },
                         ]
                     },
+                    required:{
+                        "exist":1
+                    }
                   },
                   {
                     actionStepIndex:3,
@@ -260,5 +262,45 @@ class formController {
               ]
         })
         
+    }
+    startLoginFlow(data){
+        var flow = new workflow({
+            actionSteps:[
+                {
+                    actionStepIndex:1,
+                    method:this.checkCredetials,
+                    arguments:data,
+                },
+                {
+                    actionStepIndex:2,
+                    method:this.alertAbout,
+                    condition:{
+                        completedActionSteps:[1],
+                        compare:[
+                            {
+                                value:1,
+                                equal:false
+                            },
+                        ]
+                    },
+                    required:{
+                        "exist":1
+                    }
+                },
+                {
+                    actionStepIndex:3,
+                    method:this.renderEditor,
+                    condition:{
+                        completedActionSteps:[1],
+                        compare:[
+                            {
+                                value:1,
+                                equal:true
+                            }
+                        ]
+                    },
+                }
+            ]
+        })
     }
 }

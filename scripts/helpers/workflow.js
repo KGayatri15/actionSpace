@@ -17,10 +17,9 @@ class workflow{
     onRunning() {
         this.currentState = states.RUNNING;
     }
-    onComplete(taskIndex) {
+    onComplete() {
         this.currentState = states.COMPLETED;
         console.log("Process Completed");
-        return this.result[taskIndex];
     }
     onFailure(taskIndex,exception){
         this.currentState = states.FAILED;
@@ -32,24 +31,25 @@ class workflow{
     executeActionSteps(actionSteps){
         this.onRunning();
         for(var actionStep of actionSteps){
-            if(this.currentState === states.STOPPED)
+            if(operate.isEqualStrict(this.currentState,states.STOPPED))
                 break;
-            var conditionExists;
-            actionStep['condition'] === undefined?conditionExists= true:conditionExists=false;
-            var checkSubset = conditionExists|| actionStep['condition']['completedActionSteps'] === undefined || this.checkSubset(this.actionStepsExecuted , actionStep['condition']['completedActionSteps']);
-            var comparisonsCorrect = conditionExists|| actionStep['condition']['compare'] === undefined|| this.compareValues(actionStep['condition']['compare']);
+            var conditionExists = operate.isEqualStrict( actionStep['condition'],undefined);
+            var checkSubset = conditionExists|| operate.isEqualStrict(actionStep['condition']['completedActionSteps'],undefined) || operate.hasAllof(actionStep['condition']['completedActionSteps'],this.actionStepsExecuted);
+            var comparisonsCorrect = conditionExists|| operate.isEqualStrict(actionStep['condition']['compare'],undefined)|| this.compareValues(actionStep['condition']['compare']);
             if(checkSubset && comparisonsCorrect){
-                    var input, noinput = false;
-                    if(actionStep['arguments'] === undefined &&actionStep['required'] === undefined )
-                        noinput = true;
-                    else if(actionStep['arguments'] === undefined)
+                    var input, noInput = false;
+                    var argumentsExist = operate.isEqualStrict(actionStep['arguments'],undefined);
+                    var requiredArgumentsExist = operate.isEqualStrict(actionStep['required'],undefined);
+                    if(argumentsExist && requiredArgumentsExist )
+                        noInput = true;
+                    else if(argumentsExist)
                         input = this.includeArguments({},actionStep['required'])
-                    else if(actionStep['required'] === undefined)
+                    else if(requiredArgumentsExist)
                         input = this.includeArguments(actionStep['arguments'],{})
                     else
                         input = this.includeArguments(actionStep['arguments'],actionStep['required'])
                     try{
-                        if(noinput)
+                        if(noInput)
                             this.result[actionStep['actionStepIndex']] = actionStep['method'].call(this);
                         else
                             this.result[actionStep['actionStepIndex']] = actionStep['method'].call(this,input);
@@ -58,7 +58,7 @@ class workflow{
                         this.onFailure(actionStep['actionStepIndex'],exception);
                     }
             }
-            if(actionSteps[actionSteps.length -1] === actionStep){
+            if(operate.isEqualStrict(actionSteps[actionSteps.length -1],actionStep)){
                 this.currentState = states.COMPLETED;
                 this.onComplete(actionStep['actionStepIndex']);
             }
@@ -71,31 +71,19 @@ class workflow{
         }
         return arg;
     }
-    checkSubset(arrA,arrB){
-        var check = true;
-        if(arrB !== undefined && arrB.length > 0){
-            console.log(arrA + "+++" + arrB);
-            for(var no of arrB){
-                console.log(arrA.includes(no) + ":: " + no);
-               if(!arrA.includes(no))check = false;
-            }
-        }
-        console.log(" Is completedActionSteps the subset of actionStepsExecuted " + check);
-        return check;
-    }
     compareValues(comparisons){
         var count = 0;
         for(let comparison of comparisons){
             //find it's equal or type or whatever compare it with value if yes increase count else not
-            if(comparison.hasOwnProperty("equal")&& comparison['equal'] === this.result[comparison['value']]){
+            if(comparison.hasOwnProperty("equal")&& operate.isEqualStrict(comparison['equal'],this.result[comparison['value']])){
                console.log("Equal comparison done");
                 count++;
-            }else if(comparison.hasOwnProperty("type") && comparison['type'] === typeof(this.result[comparison['value']])){
+            }else if(comparison.hasOwnProperty("type") && operate.isEqualStrict(comparison['type'],typeof(this.result[comparison['value']]))){
                 console.log("Type checked");
                 count++;
             }
         }
-        if(count === comparisons.length)
+        if(operate.isEqualStrict(count,comparisons.length))
             return true;
         return false;
     }
