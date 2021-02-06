@@ -4,7 +4,7 @@
         {
             actionStepIndex:1,
             actionStepName:string,
-            state:string,
+            state:[0.,shunya,dot,1,e],//0.- Action Step started,shunya - Awaiting Action Step,dot-Action Step in process(execution),1-Action Step Completed,e-While executing Action Step when error arises
             onEvent:enum
             method:methodName
             arguments:{},

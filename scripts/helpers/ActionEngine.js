@@ -1,42 +1,45 @@
 const states = Object.freeze({
-    RUNNING: Symbol("running"),
-    STARTED: Symbol("started"),
-    FAILED: Symbol("failed"),
-    STOPPED: Symbol("stopped"),
-    COMPLETED: Symbol("completed")
+    0.: Symbol(" ActionStep Started"),
+    shunya: Symbol("Awaiting actionStep"),
+    dot: Symbol("ActionStep in process"),
+    e: Symbol("Error"),
+    1: Symbol("ActionStep done")
 })
-
-class workflow{
+class ActionEngine{
     constructor(options){
         this.actionSteps = options.actionSteps
-        this.currentState = states.STARTED
         this.result = new Map()
+        this.currentState,this.currentActionStep ;
         this.actionStepsExecuted=[]
         this.executeActionSteps(this.actionSteps)
     }
-    onRunning() {
-        this.currentState = states.RUNNING;
+    ExecutingActionStep() {
+        this.currentState = states.dot;
+        this.updateActionStepState(this.currentState);
     }
-    onComplete() {
-        this.currentState = states.COMPLETED;
-        console.log("Process Completed");
+    ActionStepDone() {
+        this.currentState = states[1];
+        this.updateActionStepState(this.currentState);
+        console.log("Action Step" + +" Completed");
     }
-    onFailure(taskIndex,exception){
-        this.currentState = states.FAILED;
-        console.log("An exception " + exception + " while performing the task " + taskIndex);
+    ActionStepError(ActionStepIndex,exception){
+        this.currentState = states.e;
+        this.updateActionStepState(this.currentState);
+        console.log("An exception " + exception + " while performing the task " + ActionStepIndex);
     }
-    stop() {
-        this.currentState = states.STOPPED;
+    updateActionStepState(state){
+        this.currentActionStep['state'] = state;
     }
     executeActionSteps(actionSteps){
-        this.onRunning();
         for(var actionStep of actionSteps){
-            if(operate.isEqualStrict(this.currentState,states.STOPPED))
-                break;
+            this.currentState = actionStep['state'];this.currentActionStep = actionStep;
+            if(operate.isEqualStrict(this.currentState,states.shunya))
+                console.log("Waiting");
             var conditionExists = operate.isEqualStrict( actionStep['condition'],undefined);
             var checkSubset = conditionExists|| operate.isEqualStrict(actionStep['condition']['completedActionSteps'],undefined) || operate.hasAllof(actionStep['condition']['completedActionSteps'],this.actionStepsExecuted);
             var comparisonsCorrect = conditionExists|| operate.isEqualStrict(actionStep['condition']['compare'],undefined)|| this.compareValues(actionStep['condition']['compare']);
             if(checkSubset && comparisonsCorrect){
+                    this.ExecutingActionStep();
                     var input, noInput = false;
                     var argumentsExist = operate.isEqualStrict(actionStep['arguments'],undefined);
                     var requiredArgumentsExist = operate.isEqualStrict(actionStep['required'],undefined);
@@ -54,13 +57,13 @@ class workflow{
                         else
                             this.result[actionStep['actionStepIndex']] = actionStep['method'].call(this,input);
                         this.actionStepsExecuted.push(actionStep['actionStepIndex']);
+                        this.ActionStepDone();
                     }catch(exception){
-                        this.onFailure(actionStep['actionStepIndex'],exception);
+                        this.ActionStepError(actionStep['actionStepIndex'],exception);
                     }
             }
             if(operate.isEqualStrict(actionSteps[actionSteps.length -1],actionStep)){
-                this.currentState = states.COMPLETED;
-                this.onComplete(actionStep['actionStepIndex']);
+                console.log("Execution of workflow is done");
             }
         }
         console.log(this.actionStepsExecuted);

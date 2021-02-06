@@ -87,8 +87,6 @@ class entityController {
     }
 
 }
-
-
 class process extends entityController {
 
 
@@ -171,8 +169,6 @@ class process extends entityController {
     }
 
 }
-
-
 class formController {
     constructor(view, model) {
         this.view = view
@@ -215,16 +211,18 @@ class formController {
         loadActionEditor()
     }
     startSignUpFlow(data) {
-        var flow = new workflow({
+        var flow = new ActionEngine({
               actionSteps:[
                   {
                     actionStepIndex:1,
                     method:this.checkUsernameExists,
+                    state:states[0.],
                     arguments:data,
                   },
                   {
                     actionStepIndex:2,
                     method:this.alertAbout,
+                    state:states[0.],
                     condition:{
                         completedActionSteps:[1],
                         compare:[
@@ -241,6 +239,7 @@ class formController {
                   {
                     actionStepIndex:3,
                     method:this.setUsername,
+                    state:states[0.],
                     arguments:data,
                     condition:{
                         completedActionSteps:[1],
@@ -255,6 +254,7 @@ class formController {
                   {
                     actionStepIndex:4,
                     method:this.renderEditor,
+                    state:states[0.],
                     condition:{
                         completedActionSteps:[1,3],
                     },
@@ -264,16 +264,18 @@ class formController {
         
     }
     startLoginFlow(data){
-        var flow = new workflow({
+        var flow = new ActionEngine({
             actionSteps:[
                 {
                     actionStepIndex:1,
                     method:this.checkCredetials,
+                    state:states[0.],
                     arguments:data,
                 },
                 {
                     actionStepIndex:2,
                     method:this.alertAbout,
+                    state:states[0.],
                     condition:{
                         completedActionSteps:[1],
                         compare:[
@@ -290,6 +292,7 @@ class formController {
                 {
                     actionStepIndex:3,
                     method:this.renderEditor,
+                    state:states[0.],
                     condition:{
                         completedActionSteps:[1],
                         compare:[
