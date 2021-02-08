@@ -182,6 +182,11 @@ var loginForm = {
             type: 'button',
             innerText: 'Login',
             id:'login'
+        },{
+            name: 'button',
+            type: 'button',
+            innerText: 'Start Execution',
+            id:'start'
         }
 
     ]

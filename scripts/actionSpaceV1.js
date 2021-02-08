@@ -18,7 +18,7 @@ function loadActionEditor(){
             'document': document,
             'bottom': document.getElementsByTagName('bottombar')[0].children,
             'signUp':document.getElementById('sign'),
-            'login':document.getElementById('log')
+            'login':document.getElementById('log'),
         }),
         controller = new process(view, model);
 }
@@ -49,6 +49,7 @@ function loadLoginForm(){
             'login':document.getElementById('login'),
             'username':document.getElementById('username'),
             'password':document.getElementById('password'),
+            'start':document.getElementById('start')
         }),
         controller=new formController(view,formModel)
 }

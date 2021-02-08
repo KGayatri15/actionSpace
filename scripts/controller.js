@@ -216,13 +216,13 @@ class formController {
                   {
                     actionStepIndex:1,
                     method:this.checkUsernameExists,
-                    state:states[0.],
+                    state:states.START,
                     arguments:data,
                   },
                   {
                     actionStepIndex:2,
                     method:this.alertAbout,
-                    state:states[0.],
+                    state:states.START,
                     condition:{
                         completedActionSteps:[1],
                         compare:[
@@ -239,7 +239,7 @@ class formController {
                   {
                     actionStepIndex:3,
                     method:this.setUsername,
-                    state:states[0.],
+                    state:states.START,
                     arguments:data,
                     condition:{
                         completedActionSteps:[1],
@@ -254,7 +254,7 @@ class formController {
                   {
                     actionStepIndex:4,
                     method:this.renderEditor,
-                    state:states[0.],
+                    state:states.START,
                     condition:{
                         completedActionSteps:[1,3],
                     },
@@ -269,13 +269,13 @@ class formController {
                 {
                     actionStepIndex:1,
                     method:this.checkCredetials,
-                    state:states[0.],
+                    state:states.WAIT,
                     arguments:data,
                 },
                 {
                     actionStepIndex:2,
                     method:this.alertAbout,
-                    state:states[0.],
+                    state:states.START,
                     condition:{
                         completedActionSteps:[1],
                         compare:[
@@ -292,7 +292,7 @@ class formController {
                 {
                     actionStepIndex:3,
                     method:this.renderEditor,
-                    state:states[0.],
+                    state:states.START,
                     condition:{
                         completedActionSteps:[1],
                         compare:[

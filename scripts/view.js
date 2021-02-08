@@ -140,6 +140,11 @@ class formView extends EventEmitter {
                 this.emit('login',{username,password})
 
             })
+            this.elements.start?.addEventListener('click',()=>{
+                console.log("Start pe click hua");
+                ActionEngine.updateStartActionStep();
+            })
+            
     }
 
 }
